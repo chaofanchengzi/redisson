@@ -2,7 +2,6 @@ package com.zc.anti.auto.redisson;
 
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.CountDownLatch;
@@ -27,7 +26,6 @@ public class Demo {
     // 定义500个资源
     public static int count = 100;
 
-    @Autowired
     RedissonClient redissonClient;
 
     /**

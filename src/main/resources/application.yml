@@ -1,0 +1,47 @@
+spring:
+  data:
+    redis:
+      # 基础配置（确保与其他配置兼容）
+      host: localhost
+      port: 6379
+      password:
+      database: 0
+
+  # Redisson 配置（Spring Boot 3.x 格式）
+  redis:
+    redisson:
+      config: |
+        # 线程配置
+        threads: 16
+        nettyThreads: 32
+        
+        # 编码器 - 使用 Jackson（兼容 Spring Boot 3.x）
+        codec: !<org.redisson.codec.JsonJacksonCodec> {}
+        
+        # 传输模式
+        transportMode: "NIO"
+        
+        # 单机服务器配置
+        singleServerConfig:
+          address: "redis://${spring.data.redis.host}:${spring.data.redis.port}"
+          password: "${spring.data.redis.password}"
+          database: ${spring.data.redis.database:0}
+        
+          # 连接池配置
+          connectionPoolSize: 64
+          connectionMinimumIdleSize: 24
+          idleConnectionTimeout: 10000
+          connectTimeout: 10000
+          timeout: 3000
+          retryAttempts: 3
+          retryInterval: 1500
+        
+          # 订阅配置
+          subscriptionsPerConnection: 5
+          subscriptionConnectionPoolSize: 50
+          dnsMonitoringInterval: 5000
+        
+        # 全局配置
+        lockWatchdogTimeout: 30000
+        keepPubSubOrder: true
+        useScriptCache: false

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RedissonController {
 
-    @GetMapping("/test/redisson")
+    @GetMapping("/test")
     public void testRedisson() throws InterruptedException {
         Demo demo = new Demo();
         demo.produce();
